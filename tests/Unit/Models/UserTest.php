@@ -17,10 +17,9 @@ class UserTest extends TestCase
  */
     public function testCanReserve(string $plan, int $remainingCount, int $reservationCount, bool $canReserve)
     {
-        $user = new User();
+        $user       = new User();
         $user->plan = $plan;
-        $lesson = new Lesson();
-
+        $lesson     = new Lesson();
         $this->assertSame($canReserve, $user->canReserve($lesson->remainingCount(), $reservationCount));
     }
 
@@ -28,18 +27,17 @@ class UserTest extends TestCase
     {
         return [
             '予約可:レギュラー,空きあり,月の上限以下' => [
-                'plan' => 'regular',
-                'remainingCount' => 1,
+                'plan'             => 'regular',
+                'remainingCount'   => 1,
                 'reservationCount' => 4,
-                'canReserve' => true,
+                'canReserve'       => true,
             ],
             '予約不可:レギュラー,空きあり,月の上限' => [
-                'plan' => 'regular',
-                'remainingCount' => 1,
+                'plan'             => 'regular',
+                'remainingCount'   => 1,
                 'reservationCount' => 5,
-                'canReserve' => false,
+                'canReserve'       => false,
             ],
-            // 中略 残りのパターン
         ];
     }
 }
