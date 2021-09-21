@@ -37,9 +37,9 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-    public function canReserve(int $remainingCount, int $reservationCount): bool
+    public function canReserve(Lesson $lesson, int $reservationCount): bool
     {
-        if ($remainingCount === 0) {
+        if ($lesson->remainingCount() === 0) {
             return false;
         }
         if ($this->plan === 'gold') {

@@ -4,7 +4,7 @@ namespace App\Models;
 
 class VacancyLevel
 {
-    private $remainingCount;
+    public $remainingCount;
 
     public function __construct(int $remainingCount)
     {
@@ -15,6 +15,8 @@ class VacancyLevel
     {
         return $this->mark();
     }
+
+    
 
     public function mark(): string
     {
