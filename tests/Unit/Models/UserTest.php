@@ -5,7 +5,6 @@ namespace Tests\Unit\Models;
 use Tests\TestCase;
 use App\Models\User;
 use App\Models\Lesson;
-// use Tests\Unit\Models\Mockery;
 use Mockery;
 use Mockery\MockInterface;
 
