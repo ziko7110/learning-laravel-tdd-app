@@ -33,7 +33,6 @@ class UserTest extends TestCase
         $user->canReserve($lesson);
         // 例外が出ないことを確認するアサーションがないので代わりに
         $this->assertTrue(true);
-
     }
 
     public function dataCanReserve()
@@ -45,29 +44,11 @@ class UserTest extends TestCase
                 'totalReservationCount' => 1,
                 'userReservationCount' => 4,
                 'canReserve' => true,
-            ],
-        ]
+            ]
+        ];
     }
 
-    // public function dataCanReserve()
-    // {
-    //     return [
-    //         '予約可:レギュラー,空きあり,月の上限以下' => [
-    //             'plan'             => 'regular',
-    //             'remainingCount'   => 1,
-    //             'reservationCount' => 4,
-    //             'canReserve'       => true,
-    //         ],
-    //         '予約不可:レギュラー,空きあり,月の上限' => [
-    //             'plan'             => 'regular',
-    //             'remainingCount'   => 1,
-    //             'reservationCount' => 5,
-    //             'canReserve'       => false,
-    //         ],
-    //     ];
-    // }
-
-        /**
+    /**
      * @param string $plan
      * @param int $remainingCount
      * @param int $reservationCount
