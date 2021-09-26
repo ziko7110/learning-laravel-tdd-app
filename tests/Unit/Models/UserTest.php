@@ -39,11 +39,11 @@ class UserTest extends TestCase
     {
         return [
             '予約可:レギュラー,空きあり,月の上限以下' => [
-                'plan' => 'regular',
-                'capacity' => 2,
+                'plan'                  => 'regular',
+                'capacity'              => 2,
                 'totalReservationCount' => 1,
-                'userReservationCount' => 4,
-                'canReserve' => true,
+                'userReservationCount'  => 4,
+                'canReserve'            => true,
             ]
         ];
     }
