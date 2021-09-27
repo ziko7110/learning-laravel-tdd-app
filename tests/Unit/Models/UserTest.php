@@ -6,12 +6,11 @@ use Tests\TestCase;
 use App\Models\User;
 use App\Models\Lesson;
 use Mockery;
-use Mockery\MockInterface;
+
 
 
 class UserTest extends TestCase
 {
-
 /**
  * @param string $plan
  * @param int $remainingCount
