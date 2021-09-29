@@ -2,22 +2,19 @@
 
 namespace Tests\Unit\Models;
 
-use Tests\TestCase;
-use App\Models\User;
 use App\Models\Lesson;
+use App\Models\User;
 use Mockery;
-
-
+use PHPUnit\Framework\TestCase;
 
 class UserTest extends TestCase
 {
-/**
- * @param string $plan
- * @param int $remainingCount
- * @param int $reservationCount
- * @dataProvider dataCanReserve_正常
- */
-    // public function testCanReserve(string $plan, int $remainingCount, int $reservationCount, bool $canReserve)
+    /**
+    * @param string $plan
+    * @param int $remainingCount
+    * @param int $reservationCount
+    * @dataProvider dataCanReserve_正常
+    */
     public function testCanReserve_正常(string $plan, int $remainingCount, int $reservationCount)
     {
         /** @var User $user */
@@ -34,16 +31,19 @@ class UserTest extends TestCase
         $this->assertTrue(true);
     }
 
-    public function dataCanReserve()
+    public function dataCanReserve_正常()
     {
         return [
             '予約可:レギュラー,空きあり,月の上限以下' => [
-                'plan'                  => 'regular',
-                'capacity'              => 2,
-                'totalReservationCount' => 1,
-                'userReservationCount'  => 4,
-                'canReserve'            => true,
-            ]
+                'plan' => 'regular',
+                'remainingCount' => 1,
+                'reservationCount' => 4,
+            ],
+            '予約可:ゴールド,空きあり' => [
+                'plan' => 'gold',
+                'remainingCount' => 1,
+                'reservationCount' => 5,
+            ],
         ];
     }
 
@@ -61,15 +61,13 @@ class UserTest extends TestCase
         $user->shouldReceive('reservationCountThisMonth')->andReturn($reservationCount);
         $user->plan = $plan;
 
-
-        
         /** @var Lesson $lesson */
         $lesson = Mockery::mock(Lesson::class);
         $lesson->shouldReceive('remainingCount')->andReturn($remainingCount);
 
         $this->expectExceptionMessage($errorMessage);
 
-        $this->assertSame($canReserve, $user->canReserve($lesson, $reservationCount));
+        $user->canReserve($lesson);
     }
 
     public function dataCanReserve_エラー()
