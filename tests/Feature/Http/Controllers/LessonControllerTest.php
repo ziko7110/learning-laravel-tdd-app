@@ -13,7 +13,7 @@ use Tests\TestCase;
 class LessonControllerTest extends TestCase
 {
     use RefreshDatabase;
-    use CreatesUser;
+    // use CreatesUser;
 
     /**
      * @param int $capacity
@@ -31,8 +31,12 @@ class LessonControllerTest extends TestCase
             factory(Reservation::class)->create(['lesson_id' => $lesson->id, 'user_id' => $user->id]);
         }
 
-        $user = $this->createUser();
+        // $user = $this->createUser();
+        // $this->actingAs($user);
+
+        $user = factory(User::class)->create();
         $this->actingAs($user);
+ 
 
         $response = $this->get("/lessons/{$lesson->id}");
 
