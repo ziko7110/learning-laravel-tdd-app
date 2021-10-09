@@ -6,6 +6,7 @@ use App\Models\Lesson;
 use App\Models\User;
 use Mockery;
 use PHPUnit\Framework\TestCase;
+use App\Models\UserProfile;
 
 class UserTest extends TestCase
 {
@@ -20,7 +21,8 @@ class UserTest extends TestCase
         /** @var User $user */
         $user = Mockery::mock(User::class)->makePartial();
         $user->shouldReceive('reservationCountThisMonth')->andReturn($reservationCount);
-        $user->plan = $plan;
+        $user->profile = new UserProfile();
+        $user->profile->plan = $plan;
 
         /** @var Lesson $lesson */
         $lesson = Mockery::mock(Lesson::class);
@@ -59,7 +61,8 @@ class UserTest extends TestCase
         /** @var User $user */
         $user = Mockery::mock(User::class)->makePartial();
         $user->shouldReceive('reservationCountThisMonth')->andReturn($reservationCount);
-        $user->plan = $plan;
+        $user->profile = new UserProfile();
+        $user->profile->plan = $plan;
 
         /** @var Lesson $lesson */
         $lesson = Mockery::mock(Lesson::class);

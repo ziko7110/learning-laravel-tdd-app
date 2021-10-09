@@ -32,7 +32,9 @@ class LessonControllerTest extends TestCase
         }
 
         // $user = $this->createUser();
-        // $this->actingAs($user);
+        $user = factory(User::class)->create();
+        factory(UserProfile::class)->create(['user_id' => $user->id]);
+        $this->actingAs($user);
 
         $user = factory(User::class)->create();
         $this->actingAs($user);
