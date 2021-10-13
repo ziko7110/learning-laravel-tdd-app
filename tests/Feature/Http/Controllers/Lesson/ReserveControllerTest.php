@@ -24,5 +24,9 @@ class ReserveControllerTest extends TestCase
         $response->assertStatus(Response::HTTP_FOUND);
         $response->assertRedirect("/lessons/{$lesson->id}");
         // TODO データベースのアサーション
+        $this->assertDatabaseHas('reservations', [
+            'lesson_id' => $lesson->id,
+            'user_id' => $user->id,
+        ]);
     }
 }
