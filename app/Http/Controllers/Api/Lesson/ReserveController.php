@@ -7,13 +7,20 @@ use App\Models\Lesson;
 use App\Models\Reservation;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Auth;
+use Exception;
 
 class ReserveController extends Controller
 {
     public function __invoke(Lesson $lesson)
     {
         $user = Auth::user();
-        $reservation = Reservation::create(['lesson_id' => $lesson->id, 'user_id' => $user->id]);
+        try {
+            $user->canReserve($lesson);
+        } catch (Exception $e) {
+            return response()->json(['error' => '予約できません。：' . $e->getMessage()], Response::HTTP_CONFLICT);
+        }
+
+        // $reservation = Reservation::create(['lesson_id' => $lesson->id, 'user_id' => $user->id]);
 
         return response()->json($reservation, Response::HTTP_CREATED);
     }
