@@ -23,11 +23,14 @@ class ReserveControllerTest extends TestCase
         $this->actingAs($user, 'api');
 
         $response = $this->postJson("/api/lessons/{$lesson->id}/reserve");
+
+        // MEMO:下記があるとテスト失敗になる。
         // $response->assertStatus(Response::HTTP_CREATED);
         // $response->assertJson([
         //     'lesson_id' => $lesson->id,
         //     'user_id' => $user->id,
         // ]);
+
         // $this->assertDatabaseHas('reservations', [
         //     'lesson_id' => $lesson->id,
         //     'user_id' => $user->id,
