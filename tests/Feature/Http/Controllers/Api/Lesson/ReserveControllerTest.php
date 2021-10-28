@@ -9,8 +9,6 @@ use Tests\Factories\Traits\CreatesUser;
 use Tests\TestCase;
 use App\Models\Reservation;
 
-
-
 class ReserveControllerTest extends TestCase
 {
     use RefreshDatabase;
@@ -47,7 +45,7 @@ class ReserveControllerTest extends TestCase
         $response = $this->postJson("/api/lessons/{$lesson->id}/reserve");
         $response->assertStatus(Response::HTTP_CONFLICT);
         $response->assertJsonStructure(['error']);
-        
+
         // メッセージの中身まで確認したい場合は以下の2行も追加
         $error = $response->json('error');
         $this->assertStringContainsString('予約できません。', $error);
